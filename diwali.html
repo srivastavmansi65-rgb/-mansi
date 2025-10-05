@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Diwali!</title>
+  <link rel="stylesheet" href="style sheet.css1" />
+</head>
+<body>
+  <audio id="diwaliMusic" src="https://example.com/diwali-music.mp3"></audio> <!-- Replace with your music URL -->
+
+  <div class="container">
+    <div class="diyas">
+      <span class="diya">🪔</span>
+      <span class="diya">🪔</span>
+      <span class="diya">🪔</span>
+    </div>
+
+    <h1 class="title">✨ Tap to Light Up Diwali ✨</h1>
+    <button class="reveal-btn" onclick="showSurprise()">🪔 Light the Diya</button>
+
+    <div class="surprise hidden">
+      <p class="message">Wishing you joy, prosperity, and sparkle this Diwali! 🎆🪔💛</p>
+      <div class="rangoli"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    function showSurprise() {
+      document.querySelector('.surprise').classList.remove('hidden');
+      document.querySelector('.surprise').classList.add('animate');
+      document.getElementById('diwaliMusic').play();
+      confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
+happy diwali dear  nani mama mami
