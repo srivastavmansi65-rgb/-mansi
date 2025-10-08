@@ -1,56 +1,50 @@
+// Game variables
 let score = 0;
-const scoreDisplay = document.getElementById('score');
-const loveNote = document.querySelector('.love-note');
+let hearts = [];
 
-document.querySelectorAll('.cracker').forEach(cracker => {
-    cracker.addEventListener('click', () => {
-        if (!cracker.classList.contains('burst')) {
-            cracker.classList.add('burst');
-            score++;
-            scoreDisplay.textContent = `Score: ${score}`;
-            setTimeout(() => {
-                cracker.classList.remove('burst');
-            }, 500);
-        }
-        if(score === 5) {
-            revealLoveNote();
-        }
+// Function to create floating hearts for the game
+function createHeart() {
+    const gameArea = document.querySelector('.game-area');
+    if (!gameArea) return;
+
+    const heart = document.createElement('div');
+    heart.className = 'heart-item';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 250 + 'px';
+    heart.style.top = Math.random() * 250 + 'px';
+    heart.addEventListener('click', () => {
+        score++;
+        document.getElementById('score').textContent = score;
+        heart.remove();
+        hearts = hearts.filter(h => h !== heart);
     });
-});
+    gameArea.appendChild(heart);
+    hearts.push(heart);
 
-// Simple animation for lights
-setInterval(() => {
-    document.querySelectorAll('.light').forEach(light => {
-        light.style.animationDelay = Math.random() * 2 + 's';
-    });
-}, 2000);
-
-function revealLoveNote() {
-    loveNote.classList.add('reveal');
+    // Remove heart after 3 seconds if not clicked
+    setTimeout(() => {
+        if (heart.parentNode) {
+            heart.remove();
+            hearts = hearts.filter(h => h !== heart);
+        }
+    }, 3000);
 }
 
-// Love notes page script
-const hearts = document.querySelectorAll('.heart');
-const notePopup = document.getElementById('note-popup');
-const popupText = document.getElementById('popup-text');
-const closePopup = document.getElementById('close-popup');
+// Start game
+function startGame() {
+    setInterval(createHeart, 1000);
+}
 
-if (hearts.length > 0) {
+// Run animations on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Add bounce animation to hearts on messages page
+    const hearts = document.querySelectorAll('.heart');
     hearts.forEach(heart => {
-        heart.addEventListener('click', () => {
-            const note = heart.getAttribute('data-note');
-            popupText.textContent = note;
-            notePopup.classList.add('show');
-        });
+        heart.style.animation = 'bounce 1s infinite';
     });
 
-    closePopup.addEventListener('click', () => {
-        notePopup.classList.remove('show');
-    });
-
-    notePopup.addEventListener('click', (e) => {
-        if (e.target === notePopup) {
-            notePopup.classList.remove('show');
-        }
-    });
-}
+    // Start game if on game page
+    if (document.querySelector('.game-area')) {
+        startGame();
+    }
+});
