@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="golden-fireworks"></div>
+    <div class="floating-hearts"></div>
+    <div class="romantic-messages"></div>
+    <div class="container">
+        <h1 class="fade-in">Expressions of Love</h1>
+        <p class="fade-in delay-1">Timeless quotes and messages that capture our love</p>
+        <div class="quotes-container fade-in delay-2">
+            <blockquote class="quote">
+                "Happy Birthday! May your day be as sweet as cake and as bright as birthday candles! 🎂✨"
+            </blockquote>
+            <blockquote class="quote">
+                "You're not getting older, you're leveling up! Keep being awesome! 🥳🎉"
+            </blockquote>
+            <blockquote class="quote">
+                "Birthdays are nature's way of telling us to eat more cake! Let's celebrate you! 🎈🍰"
+            </blockquote>
+            <blockquote class="quote">
+                "May your birthday be filled with as much joy as you bring to others! You're amazing! 💖😊"
+            </blockquote>
+        </div>
+        <div class="hearts">
+            <span class="heart">❤️</span>
+            <span class="heart delay-2">❤️</span>
+            <span class="heart delay-3">❤️</span>
+            <span class="heart delay-4">❤️</span>
+            <span class="heart delay-5">❤️</span>
+        </div>
+        <div class="nav-links fade-in delay-4">
+            <a href="index.html" class="btn">Back to Home</a>
+            <a href="memories.html" class="btn">Our Memories</a>
+            <a href="wishes.html" class="btn">Reveal Wishes</a>
+            <a href="game.html" class="btn">Play Game</a>
+            <a href="animation.html" class="btn">Animations</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create sparkling glitter container
+            const sparkleGlitter = document.createElement('div');
+            sparkleGlitter.className = 'sparkle-glitter';
+            document.body.appendChild(sparkleGlitter);
+
+            // Function to create a glitter particle
+            function createGlitter() {
+                const glitter = document.createElement('div');
+                glitter.className = 'glitter-particle';
+                glitter.style.left = Math.random() * 100 + '%';
+                glitter.style.top = Math.random() * 100 + '%';
+                glitter.style.animationDelay = Math.random() * 3 + 's';
+                sparkleGlitter.appendChild(glitter);
+
+                // Remove glitter after animation
+                setTimeout(() => {
+                    glitter.remove();
+                }, 3000);
+            }
+
+            // Create glitter particles every 200ms
+            setInterval(createGlitter, 200);
+
+            // Create flying butterflies container
+            const flyingButterflies = document.createElement('div');
+            flyingButterflies.className = 'flying-butterflies';
+            document.body.appendChild(flyingButterflies);
+
+            // Function to create a flying butterfly with message
+            function createButterfly() {
+                const butterfly = document.createElement('div');
+                butterfly.className = 'butterfly';
+                butterfly.style.left = Math.random() * 80 + 'vw';
+                butterfly.style.animationDelay = Math.random() * 5 + 's';
+                flyingButterflies.appendChild(butterfly);
+
+                // Create message attached to butterfly
+                const message = document.createElement('div');
+                message.className = 'butterfly-message';
+                message.textContent = 'Forever Together';
+                message.style.left = butterfly.style.left;
+                message.style.top = 'calc(' + butterfly.style.top + ' + 20px)';
+                message.style.animationDelay = butterfly.style.animationDelay;
+                flyingButterflies.appendChild(message);
+
+                // Remove butterfly and message after animation
+                setTimeout(() => {
+                    butterfly.remove();
+                    message.remove();
+                }, 10000);
+            }
+
+            // Create butterflies every 4 seconds
+            setInterval(createButterfly, 4000);
+        });
+    </script>
+    <script>
+        function launchConfetti() {
+            const animationArea = document.body;
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'birthday-confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = ['#FFD700', '#FF69B4', '#00BFFF', '#FF4500', '#32CD32'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    animationArea.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 10);
+            }
+        }
+
+        // Launch confetti on page load
+        window.addEventListener('load', launchConfetti);
+    </script>
+</body>
+</html>

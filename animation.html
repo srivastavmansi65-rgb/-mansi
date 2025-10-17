@@ -1,0 +1,158 @@
+RDO<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="golden-fireworks"></div>
+    <div class="floating-hearts"></div>
+    <div class="romantic-messages"></div>
+    <div class="container">
+        <h1 class="fade-in">Birthday Animations</h1>
+        <p class="fade-in delay-1">Watch the birthday magic unfold!</p>
+        <div class="animation-container fade-in delay-2">
+            <button id="fireworks-btn" class="btn">Launch Fireworks 🎆</button>
+            <button id="hearts-btn" class="btn">Shower Hearts 💖</button>
+            <button id="sparkles-btn" class="btn">Add Sparkles ✨</button>
+            <button id="particles-btn" class="btn">Digital Particles 🌟</button>
+            <button id="confetti-btn" class="btn">Birthday Confetti 🎊</button>
+            <button id="chocolate-hearts-btn" class="btn">Chocolate Hearts Confetti 🍫❤️</button>
+        </div>
+        <div id="animation-area" class="animation-area">
+
+            <div id="message" class="animated-message">Happy Birthday! 🎉</div>
+        </div>
+        <audio autoplay loop controls>
+            <source src="Happy Birthday Wishes.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="hearts">
+            <span class="heart">❤️</span>
+            <span class="heart delay-2">❤️</span>
+            <span class="heart delay-3">❤️</span>
+            <span class="heart delay-4">❤️</span>
+            <span class="heart delay-5">❤️</span>
+        </div>
+        <div class="nav-links fade-in delay-4">
+            <a href="index.html" class="btn">Back to Home</a>
+            <a href="memories.html" class="btn">Birthday Memories</a>
+            <a href="wishes.html" class="btn">Birthday Wishes</a>
+            <a href="love.html" class="btn">Birthday Fun</a>
+            <a href="game.html" class="btn">Birthday Game</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('fireworks-btn').addEventListener('click', launchFireworks);
+        document.getElementById('hearts-btn').addEventListener('click', showerHearts);
+        document.getElementById('sparkles-btn').addEventListener('click', addSparkles);
+        document.getElementById('particles-btn').addEventListener('click', launchParticles);
+        document.getElementById('confetti-btn').addEventListener('click', launchConfetti);
+        document.getElementById('chocolate-hearts-btn').addEventListener('click', launchChocolateHeartsConfetti);
+
+        function launchFireworks() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    animationArea.appendChild(firework);
+                    setTimeout(() => firework.remove(), 2000);
+                }, i * 200);
+            }
+        }
+
+        function showerHearts() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'shower-heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    animationArea.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function addSparkles() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    animationArea.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1500);
+                }, i * 50);
+            }
+        }
+
+        function launchParticles() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'digital-particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.backgroundColor = ['#FFD700', '#FF69B4', '#00BFFF', '#FF4500'][Math.floor(Math.random() * 4)];
+                    animationArea.appendChild(particle);
+                    setTimeout(() => particle.remove(), 2000);
+                }, i * 20);
+            }
+        }
+
+        function launchConfetti() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'birthday-confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = ['#FFD700', '#FF69B4', '#00BFFF', '#FF4500', '#32CD32'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    animationArea.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 10);
+            }
+        }
+
+        function launchChocolateHeartsConfetti() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const chocolateHeart = document.createElement('div');
+                    chocolateHeart.className = 'chocolate-heart';
+                    chocolateHeart.innerHTML = '🍫❤️';
+                    chocolateHeart.style.left = Math.random() * 100 + '%';
+                    chocolateHeart.style.animationDelay = Math.random() * 2 + 's';
+                    animationArea.appendChild(chocolateHeart);
+                    setTimeout(() => chocolateHeart.remove(), 4000);
+                }, i * 100);
+            }
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'chocolate-confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = ['#8B4513', '#D2691E', '#A0522D', '#CD853F', '#DEB887'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    animationArea.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>

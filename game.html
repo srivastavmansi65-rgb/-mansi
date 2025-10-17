@@ -1,31 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Friendship Website - Game</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Birthday Memory Match</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Friendship Game</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="messages.html">Messages</a>
-            <a href="animations.html">Animations</a>
-            <a href="game.html">Game</a>
-            <a href="about.html">About</a>
-            <a href="certificate.html">Certificate</a>
-        </nav>
-    </header>
-    <main>
-        <p>Click on the floating hearts to score points!</p>
-        <div class="score">Score: <span id="score">0</span></div>
-        <div class="game-area"></div>
-    </main>
-    <footer>
-        
-    </footer>
+    <div class="golden-fireworks"></div>
+    <div class="floating-hearts"></div>
+    <div class="romantic-messages"></div>
+    <div class="container">
+        <h1 class="fade-in">Cute Birthday Memory Match 🎂</h1>
+        <p class="fade-in delay-1">Match the birthday pairs to win cute surprises! 🥳</p>
+        <div id="game-container" class="fade-in delay-2">
+            <div id="game-board" class="game-board"></div>
+            <div id="game-info">
+                <p>Moves: <span id="moves">0</span> | Matches: <span id="matches">0</span>/8</p>
+                <button id="restart-game" class="btn">New Game 🎈</button>
+            </div>
+        </div>
+        <div id="game-result" style="display: none;">
+            <h2>🎉 Congratulations! 🎉</h2>
+            <p>You completed the game in <span id="final-moves">0</span> moves!</p>
+            <p id="performance-message"></p>
+            <button id="play-again" class="btn">Play Again 🥳</button>
+        </div>
+        <div class="hearts">
+            <span class="heart">❤️</span>
+            <span class="heart delay-2">❤️</span>
+            <span class="heart delay-3">❤️</span>
+            <span class="heart delay-4">❤️</span>
+            <span class="heart delay-5">❤️</span>
+        </div>
+        <div class="nav-links fade-in delay-4">
+            <a href="index.html" class="btn">Back to Home</a>
+            <a href="memories.html" class="btn">Our Memories</a>
+            <a href="wishes.html" class="btn">Reveal Wishes</a>
+            <a href="love.html" class="btn">Love Page</a>
+            <a href="animation.html" class="btn">Animations</a>
+        </div>
+    </div>
     <script src="script.js"></script>
+    <script>
+        const birthdayCards = [
+            '🎂', '🎂', '🎈', '🎈', '💖', '💖', '🎁', '🎁',
+            '🥳', '🥳', '🌟', '🌟', '😊', '😊', '❤️', '❤️'
+        ];
+
+        let gameBoard = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let canFlip = true;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createGameBoard() {
+            const board = document.getElementById('game-board');
+            board.innerHTML = '';
+            gameBoard = shuffleArray([...birthdayCards]);
+
+            gameBoard.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'memory-card';
+                cardElement.dataset.index = index;
+                cardElement.onclick = () => flipCard(cardElement);
+                board.appendChild(cardElement);
+            });
+        }
+
+        function flipCard(card) {
+            if (!canFlip || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+
+            card.classList.add('flipped');
+            card.textContent = gameBoard[card.dataset.index];
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                moves++;
+                document.getElementById('moves').textContent = moves;
+                canFlip = false;
+
+                setTimeout(checkMatch, 1000);
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+
+            if (gameBoard[card1.dataset.index] === gameBoard[card2.dataset.index]) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                document.getElementById('matches').textContent = matchedPairs;
+
+                if (matchedPairs === 8) {
+                    setTimeout(showResult, 500);
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                card1.textContent = '';
+                card2.textContent = '';
+            }
+
+            flippedCards = [];
+            canFlip = true;
+        }
+
+        function showResult() {
+            document.getElementById('game-container').style.display = 'none';
+            const resultEl = document.getElementById('game-result');
+            resultEl.style.display = 'block';
+            document.getElementById('final-moves').textContent = moves;
+
+            let message = '';
+            if (moves <= 16) {
+                message = "Amazing! You're a birthday memory master! 🏆";
+            } else if (moves <= 24) {
+                message = "Great job! You remembered all the cute pairs! 🎊";
+            } else {
+                message = "Fun game! Keep practicing for even better scores! 😄";
+            }
+            document.getElementById('performance-message').textContent = message;
+        }
+
+        function restartGame() {
+            matchedPairs = 0;
+            moves = 0;
+            flippedCards = [];
+            canFlip = true;
+            document.getElementById('moves').textContent = '0';
+            document.getElementById('matches').textContent = '0';
+            document.getElementById('game-container').style.display = 'block';
+            document.getElementById('game-result').style.display = 'none';
+            createGameBoard();
+        }
+
+        document.getElementById('restart-game').addEventListener('click', restartGame);
+        document.getElementById('play-again').addEventListener('click', restartGame);
+
+        // Initialize game
+        createGameBoard();
+    </script>
+    <script>
+        function launchConfetti() {
+            const animationArea = document.body;
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'birthday-confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = ['#FFD700', '#FF69B4', '#00BFFF', '#FF4500', '#32CD32'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    animationArea.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 10);
+            }
+        }
+
+        // Launch confetti on page load
+        window.addEventListener('load', launchConfetti);
+    </script>
 </body>
 </html>

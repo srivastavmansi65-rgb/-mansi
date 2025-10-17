@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="golden-fireworks"></div>
+    <div class="floating-hearts"></div>
+    <div class="romantic-messages"></div>
+    <div class="container">
+        <h1 class="fade-in">Our Cherished Memories</h1>
+        <p class="fade-in delay-1">Reliving the moments that made our journey special</p>
+        <div class="memories-list fade-in delay-2">
+            <div class="memory-item">
+                <h3 Birthday with Me 🎂</h3>
+                <p>That magical day when we celebrated your special day with cake, candles, and lots of love! 🥳</p>
+                <img src="doraemon.jpeg" alt="Doraemon" class="rotate-image" style="max-width: 100%; margin-top: 1em; border-radius: 10px;">
+                <video controls style="max-width: 100%; margin-top: 1em;">
+                    <source src="birthday-memory-1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="memory-item">
+                <h3>Surprise Party Planning 💖</h3>
+                <p>The fun we had planning your surprise party – all the secret smiles and excitement! 🎈</p>
+                <img src="party-planning.jpg" alt="Party Planning Memory" style="max-width: 100%; margin-top: 1em; border-radius: 10px;">
+            </div>
+            <div class="memory-item">
+                <h3>Cake Baking Adventures 🍰</h3>
+                <p>Our messy but delicious cake baking sessions – flour everywhere but smiles on our faces! 😄</p>
+                <img src="cake-baking.jpg" alt="Cake Baking Memory" style="max-width: 100%; margin-top: 1em; border-radius: 10px;">
+            </div>
+            <div class="memory-item">
+                <h3>Birthday Wishes & Hugs 🤗</h3>
+                <p>All the warm hugs, sweet wishes, and promises of many more happy birthdays together! 🎁</p>
+                <video controls style="max-width: 100%; margin-top: 1em;">
+                    <source src="birthday-hugs.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        <div class="hearts">
+            <span class="heart">❤️</span>
+            <span class="heart delay-2">❤️</span>
+            <span class="heart delay-3">❤️</span>
+            <span class="heart delay-4">❤️</span>
+            <span class="heart delay-5">❤️</span>
+        </div>
+        <div class="nav-links fade-in delay-4">
+            <a href="index.html" class="btn">Back to Home</a>
+            <a href="wishes.html" class="btn">Reveal Wishes</a>
+            <a href="love.html" class="btn">Love Page</a>
+            <a href="game.html" class="btn">Play Game</a>
+            <a href="animation.html" class="btn">Animations</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function launchConfetti() {
+            const animationArea = document.body;
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'birthday-confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = ['#FFD700', '#FF69B4', '#00BFFF', '#FF4500', '#32CD32'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    animationArea.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 10);
+            }
+        }
+
+        // Launch confetti on page load
+        window.addEventListener('load', launchConfetti);
+    </script>
+</body>
+</html>

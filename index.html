@@ -1,31 +1,61 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Friendship Website - Home</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Surprise!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Friendship Website</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="messages.html">Messages</a>
-            <a href="animations.html">Animations</a>
-            <a href="game.html">Game</a>
-            <a href="about.html">About</a>
-            <a href="certificate.html">Certificate</a>
-        </nav>
-    </header>
-    <main>
-        <p>Celebrate friendship with messages, animations, and a fun game!</p>
-        <div class="message" style="animation: zoomIn 2s;">
-            <p>"A true friend is the greatest of all blessings."</p>
+    <div class="golden-fireworks"></div>
+    <div class="floating-hearts"></div>
+    <div class="romantic-messages"></div>
+    <div class="container">
+        <h1 class="fade-in">Happy Birthday Surprise!</h1>
+        <p class="fade-in delay-1">Get ready for a magical birthday celebration!</p>
+        <form id="name-form" class="fade-in delay-2">
+            <input type="text" id="name-input" placeholder="Enter the birthday person's name" required>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+        <div class="hearts">
             <span class="heart">❤️</span>
+            <span class="heart delay-2">❤️</span>
+            <span class="heart delay-3">❤️</span>
+            <span class="heart delay-4">❤️</span>
+            <span class="heart delay-5">❤️</span>
         </div>
-    </main>
-    <footer></footer>
+        <a href="memories.html" class="btn fade-in delay-4">Start the Birthday Journey</a>
+        <div class="nav-links fade-in delay-5">
+            <a href="composer.html" class="btn">Compose Wish 🎨</a>
+            <a href="wishes.html" class="btn">Birthday Wishes</a>
+            <a href="love.html" class="btn">Birthday Fun</a>
+            <a href="game.html" class="btn">Birthday Game</a>
+            <a href="animation.html" class="btn">Birthday Animations</a>
+            <a href="secret.html" class="btn">Secret Surprise</a>
+        </div>
+    </div>
     <script src="script.js"></script>
+    <script>
+        function launchConfetti() {
+            const animationArea = document.body;
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'birthday-confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = ['#FFD700', '#FF69B4', '#00BFFF', '#FF4500', '#32CD32'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    animationArea.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 10);
+            }
+        }
+
+        // Launch confetti on page load
+        window.addEventListener('load', launchConfetti);
+    </script>
 </body>
 </html>
